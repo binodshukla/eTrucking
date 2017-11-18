@@ -31,8 +31,11 @@ $(function() {
     $("#submit-form").submit(function(event) {
         var post_data = $(this).serialize();
         var url = api_url + $(this).attr("action");
+        alert(url);
         var dataRedirect = $(this).attr('data-redirect');
+        alert(dataRedirect);
         $.post(url, post_data, function(data){
+            alert(data['success']);
             if(data['success'] == 1)
             {
                 $(".w-form-fail").hide();
