@@ -17,7 +17,7 @@ Framework.require('ix').init([
  * ----------------------------------------------------------------------
  * Code
  */
-var api_url = "http://localhost/etrucking/index.php/api/";
+var api_url = "http://www.etrucking.co.in/index.php/api/";
 document.addEventListener("touchstart", function(){}, true);
 $(function() {
     var dataSplash = $('.page-content').attr('data-splash');
