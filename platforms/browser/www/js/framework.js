@@ -18,6 +18,28 @@ Framework.require('ix').init([
  * Code
  */
 var api_url = "http://www.etrucking.co.in/index.php/api/";
+function submit_form()
+{
+    var post_data = $("#submit-form").serialize();
+    var url = api_url + $("#submit-form").attr("action");
+    alert(url);
+    var dataRedirect = $("#submit-form").attr('data-redirect');
+    alert(dataRedirect);
+    $.post(url, post_data, function(data){
+        alert(data['success']);
+        if(data['success'] == 1)
+        {
+            $(".w-form-fail").hide();
+            goToPage(dataRedirect);
+        }
+        else
+        {
+            $(".w-form-fail").html(data['message']);
+            $(".w-form-fail").show();
+        }
+    }, 'json');
+}
+
 document.addEventListener("touchstart", function(){}, true);
 $(function() {
     var dataSplash = $('.page-content').attr('data-splash');
@@ -29,28 +51,10 @@ $(function() {
         },dataSplash);
     }
     $("#submit-form").submit(function(event) {
-        var post_data = $(this).serialize();
-        var url = api_url + $(this).attr("action");
-        alert(url);
-        var dataRedirect = $(this).attr('data-redirect');
-        alert(dataRedirect);
-        $.post(url, post_data, function(data){
-            alert(data['success']);
-            if(data['success'] == 1)
-            {
-                $(".w-form-fail").hide();
-                goToPage(dataRedirect);
-            }
-            else
-            {
-                $(".w-form-fail").html(data['message']);
-                $(".w-form-fail").show();
-            }
-        }, 'json');
+        submit_form();
         event.preventDefault();
         return false;
     });
-
     if (navigator.userAgent.match(/Mobi/)) {
         $('.mobile-wrapper').width('100%');
     }
